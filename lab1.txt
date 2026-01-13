@@ -1,0 +1,10 @@
+Part 1: Coding experience 
+    I have experience with C, Python, Javascript, and basic CSS and HTML knowledge
+
+Part 2: first line of make from the 'ls' command
+    List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+Part 3: 26th and 27th byte of digits.c
+
+
+Part 4:
