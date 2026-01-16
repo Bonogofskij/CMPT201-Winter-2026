@@ -16,7 +16,7 @@ int main() {
         digits++;
     }
 
-    printf("Number of digits: %d\n", digits);
+    printf("Number of digits: %d\nThis is the part I changed about the output\n", digits);
 
     return 0;
 }

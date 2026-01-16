@@ -5,6 +5,7 @@ Part 2: first line of make from the 'ls' command
     List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 
 Part 3: 26th and 27th byte of digits.c
-
+    00 and 00, respectively
 
 Part 4:
+    
