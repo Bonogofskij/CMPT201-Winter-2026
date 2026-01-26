@@ -20,7 +20,7 @@ int main() {
     int input[5], size = 5, option[5], temp;
     double result;
     
-    printf("******Array Manipulation Program******\n");
+    printf("******Array Manipulation Program With Changes******\nSee, I typed a new line here to alter the output");
     /*call the array filling function */
     numFill(input, size);
     
