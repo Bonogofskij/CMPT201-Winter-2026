@@ -13,7 +13,9 @@ E3:
 	$(CC) $(CFLAGS) -o lab3E3 lab3E3.o change.o -lm
 
 clean:
-	rm lab3E1 lab3E2 echo change.h.gch change.o lab3E3.o lab3E3
+	rm lab3E1 lab3E2 echo change.h.gch change.o lab3E3.o lab3E3 cmpt_201_lab_3_JDB.tar.gz
 
-echo:
-	$(CC) $(CFLAGS) -o echo echoNum.c -lm
+tar:
+	tar -zcvf cmpt_201_lab_3_JDB.tar.gz ../lab3/
+#tar:
+#	tar -zcvf cmpt_201_lab_3_JDB.tar.gz ../lab3/lab3E1.c ../lab3/lab3E2.c ../lab3/lab3E3.c ../lab3/change.c ../lab3/change.h ../lab3/makefile
