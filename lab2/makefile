@@ -25,7 +25,7 @@ testing: lab2
 	diff lab2Correct testLab2Out
 
 clean:
-	rm main.o numArray.o numArray.h.gch numMod.o numMod.h.gch lab2 testLab2Out
+	rm main.o numArray.o numArray.h.gch numMod.o numMod.h.gch lab2 testLab2Out cmpt201_lab_2_JDB.tar.gz
 
 tar: lab2 main.c numArray.c numArray.h numMod.c numMod.h README testLab2In lab2Correct makefile
 	tar -zcvf cmpt201_lab_2_JDB.tar.gz makefile main.c numArray.c numArray.h numMod.c numMod.h README lab2Correct testLab2In
