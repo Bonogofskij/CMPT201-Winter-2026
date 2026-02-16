@@ -16,6 +16,6 @@ clean:
 	rm lab3E1 lab3E2 echo change.h.gch change.o lab3E3.o lab3E3 cmpt_201_lab_3_JDB.tar.gz
 
 tar:
-	tar -zcvf cmpt_201_lab_3_JDB.tar.gz ../lab3/
+	tar -zcvf cmpt_201_lab_3_JDB.tar.gz ../lab3/lab3E1.c ../lab3/lab3E2.c ../lab3/lab3E3.c ../lab3/change.c ../lab3/change.h ../lab3/makefile
 #tar:
 #	tar -zcvf cmpt_201_lab_3_JDB.tar.gz ../lab3/lab3E1.c ../lab3/lab3E2.c ../lab3/lab3E3.c ../lab3/change.c ../lab3/change.h ../lab3/makefile

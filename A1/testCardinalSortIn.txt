@@ -1,0 +1,5 @@
+hello cmpt 201
+I hope you enjoy This Assignment!
+This will give you good practice...
+...dealing with datatype conversion.
+I am typing ^D to send EOF now. Bye!
