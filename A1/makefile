@@ -12,8 +12,11 @@ cardinalSort: cardinalSort.c
 	$(CC) $(CLAGS) cardinalSort.c -o cardinalSort
 
 testCardinalSort:
-	./sort <testCardinalSortIn.txt >testCardinalSortOut.txt
+	./cardinalSort <testCardinalSortIn.txt >testCardinalSortOut.txt
 	diff testCardinalSortOut.txt correctCardinalSort.txt
 
-clean: cardinalSort testSortOut
+cc: countingCovid.c
+	$(CC) $(CFLAGS) countingCovid.c -o cc
+
+clean: cardinalSort testCardinalSortOut.txt
 	rm cardinalSort testCardinalSortOut.txt
