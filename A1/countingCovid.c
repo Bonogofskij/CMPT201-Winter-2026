@@ -14,7 +14,8 @@ Lecture Instructor’s Name:  Ardy RD
 int main() {
 
     char buffer[100];
-    while (fgets(buffer, sizeof(buffer), stdin) != EOF) {
+    while (fgets(buffer, sizeof(buffer), stdin)) {
+        printf("%s", buffer);
         //separate with strtok()?
 
         //Split along commas

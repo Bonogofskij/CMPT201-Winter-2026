@@ -18,5 +18,8 @@ testCardinalSort:
 cc: countingCovid.c
 	$(CC) $(CFLAGS) countingCovid.c -o cc
 
-clean: cardinalSort testCardinalSortOut.txt
-	rm cardinalSort testCardinalSortOut.txt
+testcc: countingCovid.c
+	./cc < covidData_100.csv
+
+clean: cardinalSort testCardinalSortOut.txt cc
+	rm cardinalSort testCardinalSortOut.txt cc
