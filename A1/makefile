@@ -6,20 +6,33 @@
 
 CC =gcc
 CFLAGS =-Wall -std=c99
-LDFLAGS = -lm
+LDLIBS =-lm
 
+all: cardinalSort countingCovid xTable squeeze
 cardinalSort: cardinalSort.c
-	$(CC) $(CLAGS) cardinalSort.c -o cardinalSort
+	$(CC) $(CFLAGS) $? -o $@
 
+countingCovid: countingCovid.c
+	$(CC) $(CFLAGS) $? -o $@
+
+xTable: xTable.c
+	$(CC) $(CFLAGS) $? -o $@ $(LDLIBS)
+
+squeeze: squeeze.c
+	$(CC) $(CFLAGS) $? -o $@
+
+.PHONY:
+testing: testCardinalSort testCountingCovid testXTable testSqueeze
 testCardinalSort:
-	./cardinalSort <testCardinalSortIn.txt >testCardinalSortOut.txt
+	./cardinalSort < testCardinalSortIn.txt > testCardinalSortOut.txt
 	diff testCardinalSortOut.txt correctCardinalSort.txt
 
-cc: countingCovid.c
-	$(CC) $(CFLAGS) countingCovid.c -o cc
+testCountingCovid:
+	./countingCovid < covidData_100.csv | head
 
-testcc: countingCovid.c
-	./cc < covidData_100.csv
+testSqueeze:
+	./squeeze < testSqueezeIn.txt > testSqueezeOut.txt
+	diff testSqueezeOut.txt testSqueezeCorrect.txt
 
-clean: cardinalSort testCardinalSortOut.txt cc
-	rm cardinalSort testCardinalSortOut.txt cc
+clean:
+	rm -f cardinalSort testCardinalSortOut.txt countingCovid xTable
