@@ -24,15 +24,22 @@ squeeze: squeeze.c
 .PHONY:
 testing: testCardinalSort testCountingCovid testXTable testSqueeze
 testCardinalSort:
-	./cardinalSort < testCardinalSortIn.txt > testCardinalSortOut.txt
-	diff testCardinalSortOut.txt correctCardinalSort.txt
+	./cardinalSort < testing/testCardinalSortIn.txt > testing/testCardinalSortOut.txt
+	diff testing/testCardinalSortOut.txt testing/correctCardinalSort.txt
 
 testCountingCovid:
-	./countingCovid < covidData_100.csv | head
+	./countingCovid < testing/covidData_100.csv | head
+
+testXTable:
+	./xTable > testing/xTableOut.txt
+	diff testing/xTableOut.txt testing/xTableCorrect.txt
 
 testSqueeze:
-	./squeeze < testSqueezeIn.txt > testSqueezeOut.txt
-	diff testSqueezeOut.txt testSqueezeCorrect.txt
+	./squeeze < testing/testSqueezeIn.txt > testing/testSqueezeOut.txt
+	diff testing/testSqueezeOut.txt testing/testSqueezeCorrect.txt
 
 clean:
-	rm -f cardinalSort testCardinalSortOut.txt countingCovid xTable
+	rm -f cardinalSort testing/testCardinalSortOut.txt countingCovid  xTable testing/xTableOut squeeze testing/testSqueezeOut.txt *.tar.gz 
+
+tar: 
+	tar -zcvf cmpt_201_assignment_1_JDB.tar.gz ../A1/makefile ../A1/cardinalSort.c ../A1/countingCovid.c ../A1/xTable.c ../A1/squeeze.c ../A1/README ../A1/testing/ 

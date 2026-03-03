@@ -1,0 +1,19 @@
+#Student’s Name:             June Bonogofski
+#Assignment #1				 makefile
+#Lab Section:                X01-L
+#Lab Instructor’s Name:      Dhara Wagh
+#Lecture Instructor’s Name:  Ardy RD
+
+## TESTING STRATEGY ##
+
+cardinalSort:
+    I used every combination of ASCII accepted values that I plan to take in all prominent orders I could imagine. I confirmed the accuracy of the testCorrect file using the python shell script given in A1 pdf
+
+countingCovid:
+    We can use the head, tail, and full txt documents ggiven in the lab page to span a small, specific, or large amount of lines from the CSV. I couldn't get the numbers to line up, but I'm sure the structure is right. Serves me right for not putting in a bit more time in the early days of the assignment
+
+xTable:
+    There is only 1 permutation of the table, and I took several sample locations from the table to confirm the formula was being followed correctly (confirmed by hand with sci calculator). We only need 1 file, as there is no input and static output
+
+squeeze:
+    my program breaks when the last 2+ cahracters in any given line are identical, and I failed to diagnose solve the limit of 9 as a digit in time. Aside form that case, Ive covered every other permutation of chars and digits I can imagine to break this. Again, and extra few hours would have done me good here

@@ -43,7 +43,7 @@ int main() {                                    //Main function, expecting 0 as 
             printf("\n");                       //Newline char for formatting output
 
             for (i = 0; i < 128; i++) { 
-                ASCII[i] = 0;               //Reset ASCII array to 0's to prepare it for the next line
+                ASCII[i] = 0;                   //Reset ASCII array to 0's to prepare it for the next line
             }
             
             y = getc(stdin);                    //Get a new char for the while loop
