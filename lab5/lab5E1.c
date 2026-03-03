@@ -1,6 +1,6 @@
 /*------------------------------------------
 Student’s Name:             June Bonogofski
-Assignment #1               lab4E1.c
+Lab #5                      lab5E1.c
 Lab Section:                X01-L
 Lab Instructor’s Name:      Dhara Wagh
 Lecture Instructor’s Name:  Ardy RD

@@ -1,6 +1,6 @@
 /*------------------------------------------
 Student’s Name:             June Bonogofski
-Assignment #1               dynamicArray.c
+Lab #5                      dynamicArray.c
 Lab Section:                X01-L
 Lab Instructor’s Name:      Dhara Wagh
 Lecture Instructor’s Name:  Ardy RD
