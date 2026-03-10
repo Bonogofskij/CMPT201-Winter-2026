@@ -7,4 +7,4 @@ Lecture Instructor’s Name:  Ardy RD
 --------------------------------------------*/
 
 
-float * createArray(int size, float initialValue);
+float * createArray(int size, float initialValue);  //create and return a float pointer to array

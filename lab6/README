@@ -1,0 +1,22 @@
+#/*------------------------------------------
+#Student’s Name:             June Bonogofski
+#Lab #6                      README
+#Lab Section:                X01-L
+#Lab Instructor’s Name:      Dhara Wagh
+#Lecture Instructor’s Name:  Ardy RD
+#--------------------------------------------*/
+
+Fix #1:
+    Error: link.c, line 26, found using gdb command "where" after a segmentation fault
+    Problem: The func createList() failed to allocate memory before trying to copy the input string to node->data
+    Solution: create->data = malloc(firstE) to allocate the space for the string before copying input string over
+
+Fix #2:
+    Error: link.c, line 54, found using "where" and "list" to better view the context of the line
+    Problem: prev and cur nodes were initiated, but cur was never pointed to the list pointer so it didn't have a node to read
+    Solution: cur = *list, makes our cur node the head node of the given list so we can start the loop comparison strcmp condition
+
+Fix #3:
+    Error:
+    Problem:
+    Solution:
