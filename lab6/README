@@ -17,6 +17,6 @@ Fix #2:
     Solution: cur = *list, makes our cur node the head node of the given list so we can start the loop comparison strcmp condition
 
 Fix #3:
-    Error:
-    Problem:
-    Solution:
+    Error: link.c, line 76, found using where and print to examine variables to see if the loop crashed on iteration 1 or further in
+    Problem: link was never set to any node, so when dest = link, dest was not set to any meaningful node in the llist
+    Solution: before the while loop, set link to dest->next so its a valid node in the llist, or NULL if only 1 node exists

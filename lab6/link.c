@@ -67,17 +67,18 @@ void deleteNode(char * element, struct node ** list){   //Deletes a node with ->
     free(cur);                      //Free the deleted node
 }
 
-void destroy(struct node ** list){
-    struct node * dest, * link;
+void destroy(struct node ** list){  //Destroys every element of a given linked list
+    struct node * dest, * link;     //Initialize nodes to sort through llist
     
-    dest = *list;
-    while (dest != NULL){
-        if (dest->data != NULL)
-            free(dest->data);
-        free(dest);
-        dest = link;
-        if (link != NULL)
-            link=link->next;
+    dest = *list;                   //Point dest node to llist
+    link = dest->next;              //Either points to node 2 if 2+ nodes in llist, or NULL if <= 1 node in llist
+    while (dest != NULL){           //While a node exists
+        if (dest->data != NULL)     //If there is anything store in node->data
+            free(dest->data);       //Free the ->data memory
+        free(dest);                 //Free the node itself
+        dest = link;                //Dest is the next node in the list, or NULL if no more nodes exist
+        if (link != NULL)           //If link is a valid node
+            link=link->next;        //Point link to the next node in sequence
     }
-    *list = NULL;
+    *list = NULL;                   //Llist pointer doesn't need to point to llist anymore
 }
