@@ -17,18 +17,13 @@
 #ifndef _HT_IMPL_H_
 #define _HT_IMPL_H_
 
-struct ht {             //Basic node in our hashtable
-   char * name;         //The name (or string) associated with the node
-   struct ht * next;    //Pointer to the next node
-};
-
-static uint64_t hash(int tableSize, const char *s) {
-   uint64_t ret = 5381;
-   char c;
-   while ((c = *s++)) {
+static uint64_t hash(int tableSize, const char *s){   //Takes a string and hashes it, returning an uint64_t
+   uint64_t ret = 5381;             //5381 is a placeholder for now, will need to dynamically update
+   char c;                          //Char to sort through string
+   while ((c = *s++)) {             //While there still is a char assigned to c
       ret = (unsigned char)(c) + (33 * ret);
    };
-   return ret = ret % tableSize;
+   return (ret % tableSize);
 }
 
 #endif

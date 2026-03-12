@@ -16,11 +16,13 @@ testNode:
 
 testHT:
 	make hto
-	$(CC) $(CFLAGS) testHT.c -c
-	$(CC) $(CFLAGS) ht.o testHT.o -o testHT
+	$(CC) $(CFLAGS) testHT.c ht.c -o testHT
 
-hto: ht.h ht_impl.h ht.c
-	$(CC) $(CFLAGS) $? -c
+hto: ht.h ht_impl.h
+	$(CC) $(CFLAGS) ht.c ht.h -c
 
 clean:
-	rm -f *.o testing/*.o *.gch testing/*.gch testNode testHT
+	rm -f *.o testing/*.o *.gch testing/*.gch *.gz testNode testHT
+
+tar:
+	tar -zcvf homework_help_bonogofskij_multdefinitions.tar.gz makefile ht.c ht.h ht_impl.h testHT.c 
