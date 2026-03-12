@@ -14,7 +14,7 @@ Lecture Instructor’s Name:  Ardy RD
 
 
 int main() {
-    hashtable hashT = ht_create();
-
+    uint64_t tester = hash(53, "June");
+    printf("%lu\n", tester);
     return 0;
 }

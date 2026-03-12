@@ -11,6 +11,8 @@
  * Lab instructor: Dhara Wagh
  * Lecture instructor: Ardy
  */
+#include <stdio.h>
+#include <stdint.h>
 
 #ifndef _HT_IMPL_H_
 #define _HT_IMPL_H_
@@ -19,5 +21,14 @@ struct ht {             //Basic node in our hashtable
    char * name;         //The name (or string) associated with the node
    struct ht * next;    //Pointer to the next node
 };
+
+static uint64_t hash(int tableSize, const char *s) {
+   uint64_t ret = 5381;
+   char c;
+   while ((c = *s++)) {
+      ret = (unsigned char)(c) + (33 * ret);
+   };
+   return ret = ret % tableSize;
+}
 
 #endif
