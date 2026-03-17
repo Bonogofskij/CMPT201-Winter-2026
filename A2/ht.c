@@ -8,10 +8,12 @@
  * Lecture instructor: Ardy
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "ht.h"      /* Import the public hashtable header. */
-#include "ht_impl.h" /* Also import the private header, just for us! */
+#include <stdio.h>      //printf()
+#include <stdlib.h>     //memory allocation stuff
+#include <stdbool.h>    //For findPrime bool
+#include "ht.h"         //Import the public hashtable header
+#include "ht_impl.h"    //Also import the private header, just for us
+#include "findPrime.h"  //Boolean prime finder 
 
 struct ht {             //Basic node in our hashtable
    char * name;         //The name (or string) associated with the node
@@ -21,7 +23,7 @@ struct ht {             //Basic node in our hashtable
 
 hashtable ht_create(){
    struct ht * create;
-   create = malloc(sizeof(struct ht));
-   create->name = malloc(sizeof("June") + 1);
+   create = malloc(sizeof(struct ht)); 
+   create->next = NULL;                         //First node wont point to a next
    return create;
 }

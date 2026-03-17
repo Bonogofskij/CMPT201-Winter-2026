@@ -18,11 +18,19 @@ testHT:
 	make hto
 	$(CC) $(CFLAGS) testHT.c ht.c -o testHT
 
+testFindPrime: findPrime.c testFindPrime.c
+	make primeo
+	$(CC) $(CFLAGS) -lm testFindPrime.c findPrime.h -c
+	$(CC) $(CFLAGS) -lm findPrime.o testFindPrime.o -o testFindPrime
+
 hto: ht.h ht_impl.h
 	$(CC) $(CFLAGS) ht.c ht.h -c
 
+primeo: findPrime.c findPrime.h
+	$(CC) $(CFLAGS) -lm $? -c
+
 clean:
-	rm -f *.o testing/*.o *.gch testing/*.gch *.gz testNode testHT
+	rm -f *.o testing/*.o *.gch testing/*.gch *.gz testNode testHT findPrime testFindPrime
 
 tar:
 	tar -zcvf homework_help_bonogofskij_multdefinitions.tar.gz makefile ht.c ht.h ht_impl.h testHT.c 
