@@ -18,7 +18,7 @@ int main() {                            //Main func, expecting 0
     ret = hash(test1);
     printf("'January' hashes to %lu\n", ret);        
 
-    char * test2 = "February";           //Takes a string and prints out a messgae showing its hashed value
+    char * test2 = "February";          //Takes a string and prints out a messgae showing its hashed value
     ret = hash(test2);
     printf("'February' hashes to %lu\n", ret);        
 
