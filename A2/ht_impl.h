@@ -11,12 +11,10 @@
  * Lab instructor: Dhara Wagh
  * Lecture instructor: Ardy
  */
-#include <stdio.h>
-#include <stdint.h>
 
 #ifndef _HT_IMPL_H_
 #define _HT_IMPL_H_
 
-static uint64_t hash(const char *s);
+uint64_t hash(const char *s);
 
 #endif
