@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "findPrime.h"
+#include "../findPrime.h"
 
 int main() {
     int ret, test;

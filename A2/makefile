@@ -7,30 +7,17 @@
 #--------------------------------------------*/
 
 CC =gcc
-CFLAGS =-Wall -std=c99 -g
+CFLAGS =-Wall -std=c99
+TEST = testing
 
-testNode:
-	make hto
-	$(CC) $(CFLAGS) testNode.c -c
-	$(CC) $(CFLAGS) ht.o testNode.o -o testNode
+testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o
+	$(CC) $(CFLAGS) -o $@ $^
 
-testHT:
-	make hto
-	$(CC) $(CFLAGS) testHT.c ht.c -o testHT
-
-testFindPrime: findPrime.c testFindPrime.c
-	make primeo
-	$(CC) $(CFLAGS) -lm testFindPrime.c findPrime.h -c
-	$(CC) $(CFLAGS) -lm findPrime.o testFindPrime.o -o testFindPrime
-
-hto: ht.h ht_impl.h
-	$(CC) $(CFLAGS) ht.c ht.h -c
-
-primeo: findPrime.c findPrime.h
-	$(CC) $(CFLAGS) -lm $? -c
+$(TEST)/%.o : %.c | $(TEST)
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
-	rm -f *.o testing/*.o *.gch testing/*.gch *.gz testNode testHT findPrime testFindPrime
+	rm -f *.o testing/*.o *.gch testing/*.gch *.gz testNode testHT findPrime testPrime
 
 tar:
 	tar -zcvf homework_help_bonogofskij_multdefinitions.tar.gz makefile ht.c ht.h ht_impl.h testHT.c 
