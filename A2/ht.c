@@ -18,15 +18,19 @@
 
 #define INITIAL_SIZE 31
 
-struct ht {                //Basic node in our hashtable
-   const char * name;      //The name (or string) associated with the node
-   uint64_t * value;       //The key for the hashtable given the name string
+struct ht {             //Basic node in our hashtable
+   const char * name;   //The name (or string) associated with the node
+   uint64_t value;      //The key for the hashtable given the name string      //The actual entries in the table
 };
 
-struct hTable {
-   hashtable entries;
-   int length;
-   int capacity; 
+hashtable ht_create(void) {   //Creates an array of struct ht's and returns a pointer to it
+   hashtable create = calloc(INITIAL_SIZE, (sizeof(struct ht)));  //Allocate and 0 memory for INITAIL_SIZE # of struct ht's
+
+   if (create == NULL) {         //If memory allocation failed
+      return NULL;               //Return NULL
+   }
+
+   return create;                //Return the hashtable pointer
 };
 
 uint64_t hash(const char *s) {   //Hashing function, takes a string and outputs a uint64_t hash value
@@ -34,8 +38,9 @@ uint64_t hash(const char *s) {   //Hashing function, takes a string and outputs 
    uint64_t hashVal = 5381;      //Start the hashValue at 5381, cool lookin prime
    int i;                        //Variable for looping
 
-   for (i = 0; i < length; i++) {   //For every character in the string
-      hashVal += s[i] + (hashVal * 33);           //Add the value of 
+   for (i = 0; i < length; i++) {         //For every character in the string
+      hashVal += s[i] + (hashVal * 33);   //Add hashvalue to the digit + itself*33
    }
+
    return hashVal;               //The hashed Value gets returned from function
 };

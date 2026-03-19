@@ -20,8 +20,8 @@ testHash: $(TEST)/testHash		#Compiles testHash and checks if the prime function 
 	./$(TEST)/testHash > $(TEST)/testHashOut.txt
 	diff $(TEST)/testHashOut.txt $(TEST)/testHashCorrect.txt
 
-testTable: $(TEST)/testTable
-	./testTable
+testHTable: $(TEST)/testHTable
+	./testing/testHTable
 
 $(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o	#Makes testPrime out of testPrime.o and findPrime.o
 	$(CC) $(CFLAGS) -o $@ $^
@@ -29,14 +29,14 @@ $(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o	#Makes testPrime out 
 $(TEST)/testHash: $(TEST)/testHash.o $(TEST)/ht.o	#Makes testHash out of testHash.o and ht.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(TEST)/testTable: $(TEST)/testTable.o $(TEST)/ht.o
+$(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TEST)/%.o: %.c | $(TEST)		#Compiles .o file from the named .c file
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:		#Removes .gz, .o, executables and test*Out files, then clears the terminal window because I like it
-	rm -f *.o $(TEST)/*.o *.gch $(TEST)/*.gch *.gz findPrime $(TEST)/testPrime $(TEST)/*Out.txt
+	rm -f *.o $(TEST)/*.o *.gch $(TEST)/*.gch *.gz findPrime $(TEST)/testPrime $(TEST)/testHash $(TEST)/testHTable $(TEST)/*Out.txt
 	clear
 
 tar:		#Make tarball of given final files
