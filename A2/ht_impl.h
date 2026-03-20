@@ -17,6 +17,4 @@
 
 uint64_t hash(const char *s);
 
-hashtable ht_create(void);
-
 #endif
