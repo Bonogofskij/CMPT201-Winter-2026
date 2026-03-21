@@ -15,6 +15,18 @@
 #ifndef _HT_IMPL_H_
 #define _HT_IMPL_H_
 
-uint64_t hash(const char *s);
+uint64_t hash(const char *s, int capacity);
+
+struct ht {                 //Struct of our hashtable
+    hashtable items;
+    int capacity;           //How big the hashtable can be
+    int slotsFull;          //How many slots of the table are occupied
+};
+
+struct node {               //Struct of each entry in our hashtable
+    char *city;             //String of the city
+    void *value;            //Postal code
+    int deleted;            //if deleted == 1, we know the node has been destroyed (useful for lookup)
+};
 
 #endif

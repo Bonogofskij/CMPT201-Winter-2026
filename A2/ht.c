@@ -16,24 +16,21 @@
 #include "ht_impl.h"    //Also import the private header, just for us
 #include "findPrime.h"  //Boolean prime finder
 
-#define INITIAL_SIZE 31
-
-struct ht {             //Basic node in our hashtable
-   const char * name;   //The name (or string) associated with the node
-   uint64_t value;      //The key for the hashtable given the name string      //The actual entries in the table
-};
-
-hashtable ht_create(void) {   //Creates an array of struct ht's and returns a pointer to it
-   hashtable create = calloc(INITIAL_SIZE, (sizeof(struct ht)));  //Allocate and 0 memory for INITAIL_SIZE # of struct ht's
+hashtable ht_create() {   //Creates an array of struct ht's and returns a pointer to it
+   hashtable create = calloc(START_SIZE, (sizeof(struct ht)));  //Allocate and 0 memory for START_SIZE # of struct ht's
 
    if (create == NULL) {         //If memory allocation failed
       return NULL;               //Return NULL
    }
 
+   create->capacity = START_SIZE;   //Track the size of the current table
+   create->slotsFull = 0;           //New tables start at capacity = 0
+   create->myArray = calloc(create->capacity, sizeof(struct ht));
+
    return create;                //Return the hashtable pointer
 };
 
-uint64_t hash(const char *s) {   //Hashing function, takes a string and outputs a uint64_t hash value
+uint64_t hash(const char *s, int capacity) {   //Hashing function, takes a string and outputs a uint64_t hash value
    int length = strlen(s);       //Length of the string for looping
    uint64_t hashVal = 5381;      //Start the hashValue at 5381, cool lookin prime
    int i;                        //Variable for looping
@@ -43,4 +40,12 @@ uint64_t hash(const char *s) {   //Hashing function, takes a string and outputs 
    }
 
    return hashVal;               //The hashed Value gets returned from function
+};
+
+void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
+   uint64_t index = hash(key, ht->capacity);         //Grab the hashed value of the city name
+   struct node * newNode = malloc(sizeof(struct node));  //Create a node called newNode and allocate memory
+   newNode->city = key;       //key = city name
+   newNode->value = value;    //value = pCode
+   newNode->deleted = 0;      //New node, so it cant be one that's deleted
 };
