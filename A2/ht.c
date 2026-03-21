@@ -25,7 +25,7 @@ hashtable ht_create() {   //Creates an array of struct ht's and returns a pointe
 
    create->capacity = START_SIZE;   //Track the size of the current table
    create->slotsFull = 0;           //New tables start at capacity = 0
-   create->myArray = calloc(create->capacity, sizeof(struct ht));
+   create->items = calloc(create->capacity, sizeof(struct ht));   //Allocate the array of hts with NULL value
 
    return create;                //Return the hashtable pointer
 };
@@ -39,13 +39,15 @@ uint64_t hash(const char *s, int capacity) {   //Hashing function, takes a strin
       hashVal += s[i] + (hashVal * 33);   //Add hashvalue to the digit + itself*33
    }
 
-   return hashVal;               //The hashed Value gets returned from function
+   return hashVal % capacity;            //The hashed Value gets returned from function
 };
 
 void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
-   uint64_t index = hash(key, ht->capacity);         //Grab the hashed value of the city name
+   uint64_t index = hash(key, ht->capacity);
    struct node * newNode = malloc(sizeof(struct node));  //Create a node called newNode and allocate memory
    newNode->city = key;       //key = city name
    newNode->value = value;    //value = pCode
    newNode->deleted = 0;      //New node, so it cant be one that's deleted
+   ht->items[index] = newNode;
+
 };
