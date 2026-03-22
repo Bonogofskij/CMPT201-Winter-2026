@@ -10,7 +10,7 @@
 
 #include <stdio.h>      //printf()
 #include <stdlib.h>     //memory allocation stuff
-#include <string.h>     //strnlen()
+#include <string.h>     //strcpy()
 #include <stdint.h>     //uint64_t
 #include "ht.h"         //Import the public hashtable header
 #include "ht_impl.h"    //Also import the private header, just for us
@@ -30,7 +30,7 @@ hashtable ht_create() {   //Creates an array of struct ht's and returns a pointe
    return create;                //Return the hashtable pointer
 };
 
-uint64_t hash(const char *s, int capacity) {   //Hashing function, takes a string and outputs a uint64_t hash value
+int hash(const char *s, int capacity) {   //Hashing function, takes a string and outputs a uint64_t hash value
    int length = strlen(s);       //Length of the string for looping
    uint64_t hashVal = 5381;      //Start the hashValue at 5381, cool lookin prime
    int i;                        //Variable for looping
@@ -39,15 +39,14 @@ uint64_t hash(const char *s, int capacity) {   //Hashing function, takes a strin
       hashVal += s[i] + (hashVal * 33);   //Add hashvalue to the digit + itself*33
    }
 
-   return hashVal % capacity;            //The hashed Value gets returned from function
+   return (int)(hashVal % capacity);      //The hashed Value gets returned from function
 };
 
 void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
-   uint64_t index = hash(key, ht->capacity);
+   int index = hash(key, ht->capacity);
    struct node * newNode = malloc(sizeof(struct node));  //Create a node called newNode and allocate memory
-   newNode->city = key;       //key = city name
-   newNode->value = value;    //value = pCode
-   newNode->deleted = 0;      //New node, so it cant be one that's deleted
+   strcpy(newNode->city, key);   //New node, so it cant be one that's deleted
+   newNode->value = value;
+   newNode->deleted = 0;
    ht->items[index] = newNode;
-
 };

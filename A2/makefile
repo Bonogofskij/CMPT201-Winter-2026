@@ -7,10 +7,10 @@
 #--------------------------------------------*/
 
 CC =gcc
-CFLAGS =-Wall -std=c99
+CFLAGS =-Wall -std=c99 -g
 TEST = testing
 
-test: testPrime testHash		#Runs all the test programs in the dependancy list
+test: testPrime testHash testHTable		#Runs all the test programs in the dependancy list
 
 testPrime: $(TEST)/testPrime	#Compiles testPrime and checks if the prime function still returns correct value
 	./$(TEST)/testPrime > $(TEST)/testPrimeOut.txt

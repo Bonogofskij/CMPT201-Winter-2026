@@ -63,6 +63,6 @@ int main() {                            //Main func, expecting 0
     char * test12 = "December";          //Takes a string and prints out a messgae showing its hashed value
     ret = hash(test12, SIZE);
     printf("'December' hashes to %lu\n", ret);        
-   
+
     return 0;
 }

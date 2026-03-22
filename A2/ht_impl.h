@@ -15,7 +15,7 @@
 #ifndef _HT_IMPL_H_
 #define _HT_IMPL_H_
 
-uint64_t hash(const char *s, int capacity);
+int hash(const char *s, int capacity);
 
 struct ht {                 //Struct of our hashtable
     struct node ** items;
