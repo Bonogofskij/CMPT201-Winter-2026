@@ -48,12 +48,30 @@ void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and ins
    newNode->city = key;          //Set city, value, and a flag for deleted
    newNode->deleted = 0;
    newNode->value = value;
+
+   while (ht->items[index] != NULL) {        //If the ideal index is already occupied
+      index = (index + 1) % ht->capacity;    //Try the next one
+   }
+
    ht->items[index] = newNode;   //Make sure the right index points to the node
 };
 
-void * ht_lookup(const hashtable ht, const char *key) {
-   int index = hash(key, ht->capacity);
-   void *ptr = &ht->items[index]->value;
-   printf("Found pCode %s\n", *(char*)ptr);
-   return ht->items[index]->value;
+void * ht_lookup(const hashtable ht, const char *key) {  //Finds every value associated with the hashed value of 'key' in a given table
+   int index = hash(key, ht->capacity);      //Hash function to get the index to start looking in   
+   void *ptr = &ht->items[index]->value;     //Void pointer to store value of node->value
+   return ptr;    //Return void pointer to node->value
+};
+
+void ht_print_dist(const hashtable ht) {     //Formats and prints the cities in the hashtable
+   int i;                                    //Looping variable
+   char *cPtr;                               //Pointer to store city value of each valid node
+
+   for (i = 0; i < ht->capacity; i++) {      //Check every item slot form 0 to capacity-1
+      if (ht->items[i] != NULL) {            //If theres a node at this index
+         cPtr = ht->items[i]->city;          //Save the node->city to our pointer
+         printf("%s\n", cPtr);               //Print the city
+      } else {                               //If there's no node at this index
+         printf("'''\n");                    //Print placeholder text
+      }
+   }
 };
