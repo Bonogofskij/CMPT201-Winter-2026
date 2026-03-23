@@ -1,0 +1,9 @@
+New York hashes to: 5
+ht_lookup returned pCode: 123ABC
+'''
+'''
+'''
+'''
+'''
+New York
+'''

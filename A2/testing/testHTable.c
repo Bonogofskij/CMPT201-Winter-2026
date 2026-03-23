@@ -18,6 +18,7 @@ int main() {        //Main function, expects int 0 return
     char *cPtr = "123ABC";
     ht_insert(create, "New York", cPtr);            //Insert "New York, 123ABC" into create
     int index = hash("New York", create->capacity);
+    printf("New York hashes to: %d\n", index);
     void *vPtr = ht_lookup(create, "New York");
     printf("ht_lookup returned pCode: %s\n", *((char**)vPtr));
     ht_print_dist(create);

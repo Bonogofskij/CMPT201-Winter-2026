@@ -21,7 +21,8 @@ testHash: $(TEST)/testHash		#Compiles testHash and checks if the prime function 
 	diff $(TEST)/testHashOut.txt $(TEST)/testHashCorrect.txt
 
 testHTable: $(TEST)/testHTable
-	./testing/testHTable
+	./testing/testHTable > $(TEST)/testHTableOut.txt
+	diff $(TEST)/testHTableOut.txt $(TEST)/testHTableCorrect.txt
 
 $(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o	#Makes testPrime out of testPrime.o and findPrime.o
 	$(CC) $(CFLAGS) -o $@ $^
