@@ -7,3 +7,15 @@ ht_lookup returned pCode: 123ABC
 '''
 New York
 '''
+
+Now let's try adding a new node
+California hashes to: 1
+ht_lookup returned pCode: 567DEF
+Now there should be 2 nodes
+'''
+California
+'''
+'''
+'''
+New York
+'''

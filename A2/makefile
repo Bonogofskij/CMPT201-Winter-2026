@@ -11,6 +11,7 @@ CFLAGS =-Wall -std=c99 -g
 TEST = testing
 
 test: testPrime testHash testHTable		#Runs all the test programs in the dependancy list
+	rm $(TEST)/*.o
 
 testPrime: $(TEST)/testPrime	#Compiles testPrime and checks if the prime function still returns correct value
 	./$(TEST)/testPrime > $(TEST)/testPrimeOut.txt
@@ -40,5 +41,5 @@ clean:		#Removes .gz, .o, executables and test*Out files, then clears the termin
 	rm -f *.o $(TEST)/*.o *.gch $(TEST)/*.gch *.gz findPrime $(TEST)/testPrime $(TEST)/testHash $(TEST)/testHTable $(TEST)/*Out.txt
 	clear
 
-tar:		#Make tarball of given final files
+tar:		#Make tarball of final assignment files
 	tar -zcvf homework_help_bonogofskij_multdefinitions.tar.gz makefile ht.c ht.h ht_impl.h $(TEST)/*
