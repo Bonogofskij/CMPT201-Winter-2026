@@ -29,6 +29,4 @@ struct node {               //Struct of each entry in our hashtable
     int deleted;            //if deleted == 1, we know the node has been destroyed (useful for lookup)
 };
 
-
-
 #endif

@@ -15,8 +15,10 @@
 
 int main() {        //Main function, expects int 0 return
     hashtable create = ht_create();                         //Create a hashtable called 'create'
-    ht_insert(create, "New York", "123ABC");                //Insert "New York, 123ABC" into create
+    char *cPtr = "123ABC";
+    void *ptr = &cPtr;
+    ht_insert(create, "New York", ptr);                //Insert "New York, 123ABC" into create
     int index = hash("123ABC", create->capacity);
-    printf("Index: %d\n", index);
+    ptr = ht_lookup(create, "New York");
     return 0;       //Exits main func
 }

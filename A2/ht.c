@@ -43,10 +43,17 @@ int hash(const char *s, int capacity) {   //Hashing function, takes a string and
 };
 
 void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
-   int index = hash(key, ht->capacity);
-   struct node * newNode = malloc(sizeof(struct node));  //Create a node called newNode and allocate memory
-   strcpy(newNode->city, key);   //New node, so it cant be one that's deleted
-   newNode->value = value;
+   int index = hash(key, ht->capacity);                  //Use the hash funtion to determine the index we want to place the node at
+   struct node *newNode = malloc(sizeof(struct node));   //Allocate memory for a new node
+   newNode->city = key;          //Set city, value, and a flag for deleted
    newNode->deleted = 0;
-   ht->items[index] = newNode;
+   newNode->value = value;
+   ht->items[index] = newNode;   //Make sure the right index points to the node
+};
+
+void * ht_lookup(const hashtable ht, const char *key) {
+   int index = hash(key, ht->capacity);
+   void *ptr = &ht->items[index]->value;
+   printf("Found pCode %s\n", *(char*)ptr);
+   return ht->items[index]->value;
 };
