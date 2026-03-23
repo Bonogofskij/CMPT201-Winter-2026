@@ -9,17 +9,17 @@
 #include <math.h>       //For multiplication
 #include "findPrime.h"  //Prototype
 
-int findPrime(int i) {  //Given an int, returns true if int is a prime number, false otherwise
-    int retVal = 1;
+int findPrime(float f) {  //Given an int, returns 1 if int is a prime number, 0 otherwise
+    int retVal = 1.00;
     
-    if (i <= 1) {       //If i is one, 0, or negative
+    if (f <= 1) {       //If i is one, 0, or negative
         retVal = 0;     //one isnt prime
     }
 
     int n;              //Looping variable
 
-    for (n = 2; (n * n) <= i; n++) {    //Start from i = 2, we only need to check to sqrt(i) so this saves us computing time
-        if (i % n == 0) {   //If it can be divided evenly by n
+    for (n = 2.00; (n * n) <= f; n++) {    //Start from i = 2, we only need to check to sqrt(i) so this saves us computing time
+        if (((int)f % n) == 0) {   //If it can be divided evenly by n
             retVal = 0;     //Cant be prime then
         }
     }

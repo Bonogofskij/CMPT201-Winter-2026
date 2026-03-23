@@ -24,11 +24,41 @@ hashtable ht_create() {   //Creates an array of struct ht's and returns a pointe
    }
 
    create->capacity = START_SIZE;   //Track the size of the current table
-   create->slotsFull = 0;           //New tables start at capacity = 0
+   create->slotsFull = 0.00;           //New tables start at capacity = 0
    create->items = calloc(create->capacity, sizeof(struct ht));   //Allocate the array of hts with NULL value
 
    return create;                //Return the hashtable pointer
 };
+
+hashtable ht_resize(hashtable ht, int oldCapacity) {
+   float newSize = ht->capacity * 2;
+   while (findPrime(newSize) == 0) {
+      newSize ++;
+   }
+
+   hashtable newHt = calloc(newSize, (sizeof(struct ht)));
+   if (newHt == NULL) {
+      return NULL;
+   }
+
+   newHt->capacity = newSize;
+   newHt->slotsFull = 0;
+   newHt->items = calloc(newHt->capacity, sizeof(struct ht));
+
+   int i;
+   char *cPtr;
+   void *vPtr;
+
+   for (i = 0; i < ht->capacity; i++) {
+      if (ht->items[i] != NULL) {
+         cPtr = (ht->items[i]->city);
+         vPtr = (ht->items[i]->value);
+         ht_insert(newHt, cPtr, vPtr);
+      }
+   }
+
+   return newHt;
+}
 
 int hash(const char *s, int capacity) {   //Hashing function, takes a string and outputs a uint64_t hash value
    int length = strlen(s);       //Length of the string for looping
@@ -43,14 +73,24 @@ int hash(const char *s, int capacity) {   //Hashing function, takes a string and
 };
 
 void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
+   float full = (float)ht->slotsFull;
+   float cap = (float)ht->capacity;
+
+   printf("full/cap = %.2f\n", full/cap);
+   
+   if ((full / cap) > 0.66) {
+      printf("Triggered the resizing function\n");
+   }
+   
    int index = hash(key, ht->capacity);                  //Use the hash funtion to determine the index we want to place the node at
    struct node *newNode = malloc(sizeof(struct node));   //Allocate memory for a new node
    newNode->city = key;          //Set city, value, and a flag for deleted
+
    newNode->deleted = 0;
    newNode->value = value;
 
    while (ht->items[index] != NULL) {        //If the ideal index is already occupied
-      index = (index + 1) % ht->capacity;    //Try the next one
+      index = (index + 1) % (int)ht->capacity;    //Try the next one
    }
 
    ht->items[index] = newNode;   //Make sure the right index points to the node

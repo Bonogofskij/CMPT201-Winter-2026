@@ -31,7 +31,7 @@ $(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o	#Makes testPrime out 
 $(TEST)/testHash: $(TEST)/testHash.o $(TEST)/ht.o	#Makes testHash out of testHash.o and ht.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o
+$(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o $(TEST)/findPrime.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TEST)/%.o: %.c | $(TEST)		#Compiles .o file from the named .c file

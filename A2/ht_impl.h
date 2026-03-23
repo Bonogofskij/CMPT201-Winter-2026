@@ -19,8 +19,8 @@ int hash(const char *s, int capacity);
 
 struct ht {                 //Struct of our hashtable
     struct node ** items;
-    int capacity;           //How big the hashtable can be
-    int slotsFull;          //How many slots of the table are occupied
+    float capacity;           //How big the hashtable can be
+    float slotsFull;          //How many slots of the table are occupied
 };
 
 struct node {               //Struct of each entry in our hashtable
@@ -28,5 +28,7 @@ struct node {               //Struct of each entry in our hashtable
     void *value;            //Postal code
     int deleted;            //if deleted == 1, we know the node has been destroyed (useful for lookup)
 };
+
+hashtable ht_resize(hashtable ht, int oldCapacity);     //Resizing function if table reaches >2/3 full
 
 #endif

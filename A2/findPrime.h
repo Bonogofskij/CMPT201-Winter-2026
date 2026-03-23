@@ -6,4 +6,4 @@
 #Lecture Instructor’s Name: Ardy RD
 #--------------------------------------------*/
 
-int findPrime(int i);   //Given an int, returns 1 if the int is prime, 0 otherwise
+int findPrime(float f);   //Given an int, returns 1 if the int is prime, 0 otherwise
