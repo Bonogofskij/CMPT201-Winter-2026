@@ -8,14 +8,14 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "../findPrime.h"
+#include "../prime.h"
 
 int main() {
     int ret, test;
     
     test = 1;
-    printf("Testing findPrime(%d)\n", test);
-    ret = findPrime(test);
+    printf("Testing isPrime(%d)\n", test);
+    ret = isPrime(test);
     if (ret == 0) {
         printf("%d is not prime!\n", test);
     } else {
@@ -23,8 +23,8 @@ int main() {
     }
 
     test = 5;
-    printf("Testing findPrime(%d), which should be prime\n", test);
-    ret = findPrime(test);
+    printf("Testing isPrime(%d), which should be prime\n", test);
+    ret = isPrime(test);
     if (ret == 0) {
         printf("%d is not prime, somethings up!\n", test);
     } else {
@@ -32,8 +32,8 @@ int main() {
     }
 
     test = 21;
-    printf("Testing findPrime(%d), which should not be prime\n", test);
-    ret = findPrime(test);
+    printf("Testing isPrime(%d), which should not be prime\n", test);
+    ret = isPrime(test);
     if (ret == 0) {
         printf("%d is not prime\n", test);
     } else {
@@ -41,13 +41,17 @@ int main() {
     }
 
     test = 5381;
-    printf("Testing findPrime(%d), which should be prime\n", test);
-    ret = findPrime(test);
+    printf("Testing isPrime(%d), which should be prime\n", test);
+    ret = isPrime(test);
     if (ret == 0) {
         printf("%d is not prime, something is up!\n", test);
     } else {
         printf("%d is prime!\n", test);
     }
+
+    float oldPrime = 7.00;
+    float new = newPrime(oldPrime);
+    printf("New prime should be 17: %.0f\n", new);
 
     return 0;
 }

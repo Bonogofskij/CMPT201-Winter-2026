@@ -6,4 +6,6 @@
 #Lecture Instructor’s Name: Ardy RD
 #--------------------------------------------*/
 
-int findPrime(float f);   //Given an int, returns 1 if the int is prime, 0 otherwise
+int isPrime(float f);     //Given an int, returns 1 if the int is prime, 0 otherwise
+
+float newPrime(float f);    //Given a float, find the next prime at least 2x the value of f

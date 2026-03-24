@@ -1,8 +1,9 @@
-Testing findPrime(1)
+Testing isPrime(1)
 1 is not prime!
-Testing findPrime(5), which should be prime
+Testing isPrime(5), which should be prime
 5 is prime! (ret == 1)
-Testing findPrime(21), which should not be prime
+Testing isPrime(21), which should not be prime
 21 is not prime
-Testing findPrime(5381), which should be prime
+Testing isPrime(5381), which should be prime
 5381 is prime!
+New prime should be 17: 17

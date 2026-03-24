@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "../ht.h"
 #include "../ht_impl.h"
-#include "../findPrime.h"
+#include "../prime.h"
 
 int main() {        //Main function, expects int 0 return
     hashtable create = ht_create();                 //Create a hashtable called 'create'
@@ -48,8 +48,11 @@ int main() {        //Main function, expects int 0 return
     ht_insert(create, "Maine", cPtr);
     cPtr = "pCode5";
     ht_insert(create, "Georgia", cPtr);
+    //Above was the last node we can add before the resizing function is triggered
+    cPtr = "pCode6";
+    ht_insert(create, "New Mexico", cPtr);
 
-
+    printf("New hashtable->capacity: %.0f\nNew hashtable->slotsFull: %.0f", create->capacity, create->slotsFull);
 
     return 0;       //Exits main func
 }

@@ -14,7 +14,7 @@
 #include <stdint.h>     //uint64_t
 #include "ht.h"         //Import the public hashtable header
 #include "ht_impl.h"    //Also import the private header, just for us
-#include "findPrime.h"  //Boolean prime finder
+#include "prime.h"  //Boolean prime finder
 
 hashtable ht_create() {   //Creates an array of struct ht's and returns a pointer to it
    hashtable create = calloc(START_SIZE, (sizeof(struct ht)));  //Allocate and 0 memory for START_SIZE # of struct ht's
@@ -30,34 +30,71 @@ hashtable ht_create() {   //Creates an array of struct ht's and returns a pointe
    return create;                //Return the hashtable pointer
 };
 
-hashtable ht_resize(hashtable ht, int oldCapacity) {
-   float newSize = ht->capacity * 2;
-   while (findPrime(newSize) == 0) {
-      newSize ++;
+hashtable ht_create_size(float oldCapacity) {
+   hashtable newHt = malloc(sizeof(struct ht));    //Allocate memory for a new hashtable of given size
+   float newCapacity = newPrime(oldCapacity);
+   newHt->capacity = newCapacity;   //Set the capacity to the new table size
+   
+   newHt->slotsFull = (float)0;     //New table have all slots free
+
+   newHt->items = calloc((size_t)newHt->capacity, sizeof(struct node));
+
+   return newHt;
+}
+
+static struct node HT_DELETED_ITEM = {NULL, NULL};    //Deleted node tracker
+
+void ht_remove(hashtable ht, const char *key) {       //Remove a node with the given key from given hashtable
+   int index = hash(key, ht->capacity);               //Get the index of the key to start our search
+   struct node * newNode = ht->items[index];          //Create a new pointer to the node at ht->items[index]
+
+   while (newNode != NULL) {                       //While newNode points to a valid node
+      if (newNode != &HT_DELETED_ITEM) {           //And the node hasnt been deleted already
+         if (strcmp(newNode->city, key) == 0) {         //If this node has the key we want
+            free(newNode->city);                   //Free the city
+            free(newNode->value);                  //Free the value
+            free(newNode);                         //Free the node itself
+            ht->items[index] = &HT_DELETED_ITEM;   //Mark that index as deleted
+         }
+      }
+      index = (index + 1) % (int)ht->capacity;     //Advance the index by 1
    }
+   ht->slotsFull--;
+}
 
-   hashtable newHt = calloc(newSize, (sizeof(struct ht)));
-   if (newHt == NULL) {
-      return NULL;
-   }
-
-   newHt->capacity = newSize;
-   newHt->slotsFull = 0;
-   newHt->items = calloc(newHt->capacity, sizeof(struct ht));
-
+void ht_free(hashtable ht) {
    int i;
-   char *cPtr;
-   void *vPtr;
 
-   for (i = 0; i < ht->capacity; i++) {
-      if (ht->items[i] != NULL) {
-         cPtr = (ht->items[i]->city);
-         vPtr = (ht->items[i]->value);
-         ht_insert(newHt, cPtr, vPtr);
+   for (i = 0; i < (int)ht->capacity; i++) {
+      struct node * tmp = ht->items[i];
+      if (tmp != NULL) {
+         free(tmp);
+      }
+   }
+}
+
+void ht_resize(hashtable ht, float oldCapacity) {
+   hashtable newHt = ht_create_size(oldCapacity);     //Create a new hashtable with the next capacity up
+
+   int i;         //Looping variable
+
+   for (i = 0; i < (int)ht->capacity; i++) {                //For each slot in the input hashtable
+      struct node *newNode = ht->items[i];                  //Create a new node with the same data
+      if (newNode != NULL) {  //Make sure the node points to a real node
+         ht_insert(newHt, newNode->city, newNode->value);   //Insert the node into the new hashtable
       }
    }
 
-   return newHt;
+   ht->slotsFull = newHt->slotsFull;   //original slotsFull set to new slots full, after insertion
+
+   ht->capacity = newHt->capacity;     //change original ->capacity to new->capacity
+   newHt->capacity = oldCapacity;      //Swap oldCapacity into the new table
+
+   struct node **newItems = ht->items; //Create a pointer to the list of struct nodes in original table
+   ht->items = newHt->items;           //Swap newHt->items with oldHt->items
+   newHt->items = newItems;            //Give newHt oldHt's list
+
+   ht_free(newHt);
 }
 
 int hash(const char *s, int capacity) {   //Hashing function, takes a string and outputs a uint64_t hash value
@@ -75,23 +112,21 @@ int hash(const char *s, int capacity) {   //Hashing function, takes a string and
 void ht_insert(hashtable ht, char *key, void *value) {   //Create a node and insert it into given hashtable
    float full = (float)ht->slotsFull;
    float cap = (float)ht->capacity;
-
-   printf("full/cap = %.2f\n", full/cap);
    
    if ((full / cap) > 0.66) {
-      printf("Triggered the resizing function\n");
+      ht_resize(ht, ht->capacity);
    }
    
    int index = hash(key, ht->capacity);                  //Use the hash funtion to determine the index we want to place the node at
    struct node *newNode = malloc(sizeof(struct node));   //Allocate memory for a new node
    newNode->city = key;          //Set city, value, and a flag for deleted
 
-   newNode->deleted = 0;
    newNode->value = value;
 
    while (ht->items[index] != NULL) {        //If the ideal index is already occupied
       index = (index + 1) % (int)ht->capacity;    //Try the next one
    }
+   ht->slotsFull += 1;
 
    ht->items[index] = newNode;   //Make sure the right index points to the node
 };

@@ -26,9 +26,14 @@ struct ht {                 //Struct of our hashtable
 struct node {               //Struct of each entry in our hashtable
     char *city;             //String of the city
     void *value;            //Postal code
-    int deleted;            //if deleted == 1, we know the node has been destroyed (useful for lookup)
 };
 
-hashtable ht_resize(hashtable ht, int oldCapacity);     //Resizing function if table reaches >2/3 full
+void ht_free(hashtable ht);
+
+void ht_remove(hashtable ht, const char *key);
+
+void ht_resize(hashtable ht, float oldCapacity);     //Resizing function if table reaches >2/3 full
+
+hashtable ht_create_size(float capacity);       //Creates a hashtable of a given float size
 
 #endif

@@ -7,9 +7,9 @@
 #--------------------------------------------*/
 
 #include <math.h>       //For multiplication
-#include "findPrime.h"  //Prototype
+#include "prime.h"  //Prototype
 
-int findPrime(float f) {  //Given an int, returns 1 if int is a prime number, 0 otherwise
+int isPrime(float f) {  //Given an int, returns 1 if int is a prime number, 0 otherwise
     int retVal = 1.00;
     
     if (f <= 1) {       //If i is one, 0, or negative
@@ -25,4 +25,13 @@ int findPrime(float f) {  //Given an int, returns 1 if int is a prime number, 0 
     }
 
     return retVal;      //Return retVal (prime is 1, non-prime is 0)
+}
+
+float newPrime(float f) {
+    float newSize = f * 2;
+    while (isPrime(newSize) == 0) {
+        newSize++;
+    }
+
+    return newSize;
 }

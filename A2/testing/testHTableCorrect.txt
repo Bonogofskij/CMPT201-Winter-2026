@@ -19,3 +19,6 @@ California
 '''
 New York
 '''
+Let's add some more to trigger a resize
+New hashtable->capacity: 17
+New hashtable->slotsFull: 6

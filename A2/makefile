@@ -25,13 +25,13 @@ testHTable: $(TEST)/testHTable
 	./testing/testHTable > $(TEST)/testHTableOut.txt
 	diff $(TEST)/testHTableOut.txt $(TEST)/testHTableCorrect.txt
 
-$(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/findPrime.o	#Makes testPrime out of testPrime.o and findPrime.o
+$(TEST)/testPrime: $(TEST)/testPrime.o $(TEST)/prime.o	#Makes testPrime out of testPrime.o and findPrime.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TEST)/testHash: $(TEST)/testHash.o $(TEST)/ht.o	#Makes testHash out of testHash.o and ht.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o $(TEST)/findPrime.o
+$(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o $(TEST)/prime.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TEST)/%.o: %.c | $(TEST)		#Compiles .o file from the named .c file
