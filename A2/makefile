@@ -10,6 +10,10 @@ CC =gcc
 CFLAGS =-Wall -std=c99 -g
 TEST = testing
 
+pCode: pCode.o ht.o prime.o
+	$(CC) $(CFLAGS) $? -o $@
+	gdb pCode datasets/postalcodes_20.in
+
 test: testPrime testHash testHTable		#Runs all the test programs in the dependancy list
 	rm $(TEST)/*.o
 
@@ -37,9 +41,12 @@ $(TEST)/testHTable: $(TEST)/testHTable.o $(TEST)/ht.o $(TEST)/prime.o
 $(TEST)/%.o: %.c | $(TEST)		#Compiles .o file from the named .c file
 	$(CC) $(CFLAGS) -c $^ -o $@
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
 clean:		#Removes .gz, .o, executables and test*Out files, then clears the terminal window because I like it
-	rm -f *.o $(TEST)/*.o *.gch $(TEST)/*.gch *.gz findPrime $(TEST)/testPrime $(TEST)/testHash $(TEST)/testHTable $(TEST)/*Out.txt
+	rm -f *.o $(TEST)/*.o *.gch $(TEST)/*.gch *.gz findPrime $(TEST)/testPrime $(TEST)/testHash $(TEST)/testHTable $(TEST)/*Out.txt pCode
 	clear
 
 tar:		#Make tarball of final assignment files
-	tar -zcvf homework_help_bonogofskij_multdefinitions.tar.gz makefile ht.c ht.h ht_impl.h $(TEST)/*
+	tar -zcvf cmpt201_assgn_2_JDB.tar.gz ../A2/makefile ../A2/ht.* ../A2/ht_impl.h ../A2/pCode.c ../A2/prime.* ../A2/$(TEST)/*

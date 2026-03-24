@@ -14,7 +14,7 @@
 #include <stdint.h>     //uint64_t
 #include "ht.h"         //Import the public hashtable header
 #include "ht_impl.h"    //Also import the private header, just for us
-#include "prime.h"  //Boolean prime finder
+#include "prime.h"      //prime functions
 
 hashtable ht_create() {   //Creates an array of struct ht's and returns a pointer to it
    hashtable create = calloc(START_SIZE, (sizeof(struct ht)));  //Allocate and 0 memory for START_SIZE # of struct ht's
@@ -59,18 +59,19 @@ void ht_remove(hashtable ht, const char *key) {       //Remove a node with the g
       }
       index = (index + 1) % (int)ht->capacity;     //Advance the index by 1
    }
-   ht->slotsFull--;
+   ht->slotsFull--;                                //Count has to decrease when we delete
 }
 
-void ht_free(hashtable ht) {
-   int i;
+void ht_free(hashtable ht) {                       //Free all allocated memory for a hashtable
+   int i;                                          //Looping variable
 
-   for (i = 0; i < (int)ht->capacity; i++) {
-      struct node * tmp = ht->items[i];
-      if (tmp != NULL) {
-         free(tmp);
+   for (i = 0; i < (int)ht->capacity; i++) {       //For each slot in the hashtable    
+      struct node * tmp = ht->items[i];            //Create a pointer to that slot struct node
+      if (tmp != NULL) {                           //If the slot ISNT NULL
+         free(tmp);                                //We have to free it
       }
    }
+   free(ht);                                       //Free the table itself
 }
 
 void ht_resize(hashtable ht, float oldCapacity) {
