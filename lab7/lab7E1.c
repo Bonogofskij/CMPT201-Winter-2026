@@ -29,11 +29,11 @@ game gameNode(double price, char * title, unsigned int popularity) {
 
 //Compares game popularity based 
 int compGamesByTitle(const void * a, const void * b) {
-
+    return 0;
 };
 
 int compGamesByPrice(const void *a, const void * b) {
-
+    return 0;
 };
 
 int main() {
