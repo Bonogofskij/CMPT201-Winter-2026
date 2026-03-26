@@ -21,3 +21,6 @@ $(TEST)/lab7E1.o: lab7E1.c
 
 clean:
 	rm -f *.o
+
+tar:
+	tar -zcvf cmpt201_lab_7_JDB.tar.gz ../lab7E1.c ../makefile
