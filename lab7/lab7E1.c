@@ -37,5 +37,7 @@ int compGamesByPrice(const void *a, const void * b) {
 };
 
 int main() {
+    game ** gameArray = malloc(sizeof(game));
+
     return 0;
 }

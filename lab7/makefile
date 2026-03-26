@@ -10,7 +10,8 @@
 CC =gcc
 CFLAGS =-Wall -std=c99 -g
 
-lab7E1: lab7E1.o
+E1: lab7E1.o
+	$(CC) $(CFLAGS) $? -o lab7E1
 	./lab7E1
 
 %.o: %.c
