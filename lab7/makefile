@@ -9,14 +9,11 @@
 
 CC =gcc
 CFLAGS =-Wall -std=c99 -g
-TEST =testing
 
-test: $(TEST)/testE1
+lab7E1: lab7E1.o
+	./lab7E1
 
-$(TEST)/testE1: $(TEST)/lab7E1.o
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(TEST)/lab7E1.o: lab7E1.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
