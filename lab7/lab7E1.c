@@ -34,7 +34,7 @@ void printArray(game ** array) {        //Prints the given game array with table
 
     for (i = 0; i < 6; i++) {       //For each slot in the array
         //Print all its information
-        printf("$%-10.2lf%-24s%u\n", array[i]->price, array[i]->title, array[0]->popularity);
+        printf("$%-10.2lf%-24s%u\n", array[i]->price, array[i]->title, array[i]->popularity);
     };
 }
 
@@ -55,7 +55,7 @@ int compGamesByPrice(const void *a, const void * b) {
         length = (size_t)(strlen(g2->title));
     }
 
-    return strncmp(g1->title, g2->title, length);
+    return (g1->price - g2->price);
 };
 
 int main() {
@@ -79,8 +79,9 @@ int main() {
 
     printArray(gameArray);
 
-    game ** priceArray = gameArray;
-    qsort(priceArray, 6, sizeof(game), compGamesByPrice);
+    qsort(gameArray, 6, sizeof(game), compGamesByPrice);
+
+    printArray(gameArray);
 
     return 0;
 }
