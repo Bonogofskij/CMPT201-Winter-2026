@@ -27,12 +27,13 @@ game * gameNode(double price, char * title, unsigned int popularity) {
     return node;       //Return pointer to the created node
 };
 
-void printArray(game ** array) {
-    int i;
+void printArray(game ** array) {        //Prints the given game array with table formatting
+    int i;      //Looping variable
 
-    printf("%-10s%-25s%s\n", "Price", "Title", "Popularity");
+    printf("%-10s%-25s%s\n", "Price", "Title", "Popularity");   //Column headers for user
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 6; i++) {       //For each slot in the array
+        //Print all its information
         printf("$%-10.2lf%-24s%u\n", array[i]->price, array[i]->title, array[0]->popularity);
     };
 }
