@@ -28,8 +28,16 @@ game * gameNode(double price, char * title, unsigned int popularity) {
 };
 
 //Compares game popularity based 
-int compGamesByTitle(const void * a, const void * b) { 
-    return strcasecmp(*(const char **)a, *(const char **)b);
+int compGamesByTitle(const void * a, const void * b) {
+    size_t len1 = strlen(a);
+    size_t len2 = strlen(b);
+    size_t length;
+    if (len1 > len2) {
+        length = len1;
+    } else {
+        length = len2;
+    }
+    return strncmp(*(const char **)a, *(const char **)b, length);
 };
 
 int compGamesByPrice(const void *a, const void * b) {
