@@ -19,6 +19,7 @@ E1: lab7E1.o
 
 clean:
 	rm -f *.o lab7E1
+	clear
 
 tar:
 	tar -zcvf cmpt201_lab_7_JDB.tar.gz ../lab7E1.c ../makefile

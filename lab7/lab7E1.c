@@ -18,13 +18,13 @@ typedef struct {
 } game;     //Yay typedefs
 
 //Make a 'game' struct with given values, and return a pointer to the struct
-game gameNode(double price, char * title, unsigned int popularity) {
+game * gameNode(double price, char * title, unsigned int popularity) {
     game * node = malloc(sizeof(game));     //Allocate memory for the node
     node->price = price;                    //Set node->price to price
     strcpy(node->title, title);             //copy title to node->title
     node->popularity = popularity;          //Set node->popularity to popularity
 
-    return *node;       //Return pointer to the created node
+    return node;       //Return pointer to the created node
 };
 
 //Compares game popularity based 
@@ -37,6 +37,7 @@ int compGamesByPrice(const void *a, const void * b) {
 };
 
 int main() {
-
+    game *node1 = gameNode(22.79, "Opus Magnum", 1);
+    printf("Our node contains\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n", node1->price, node1->title, node1->popularity);
     return 0;
 }
