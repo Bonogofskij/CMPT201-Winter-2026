@@ -28,8 +28,8 @@ game * gameNode(double price, char * title, unsigned int popularity) {
 };
 
 //Compares game popularity based 
-int compGamesByTitle(const void * a, const void * b) {
-    return 0;
+int compGamesByTitle(const void * a, const void * b) { 
+    return strcasecmp(*(const char **)a, *(const char **)b);
 };
 
 int compGamesByPrice(const void *a, const void * b) {
@@ -37,6 +37,7 @@ int compGamesByPrice(const void *a, const void * b) {
 };
 
 int main() {
+    //Initialize all the nodes to match the given table
     game *node1 = gameNode(22.79, "Opus Magnum", 1);
     game *node2 = gameNode(0.01, "Minecraft", 4);
     game *node3 = gameNode(14.99, "Trainz", 2);
@@ -44,8 +45,9 @@ int main() {
     game *node5 = gameNode(7.79, "Lemmings Revolution", 3);
     game *node6 = gameNode(64.96, "Warcraft", 1);
 
-    static game * gameArray[6];
+    static game * gameArray[6];     //Initialize the array
     
+    //Add all the nodes to the array
     gameArray[0] = node1;
     gameArray[1] = node2;
     gameArray[2] = node3;
@@ -53,12 +55,7 @@ int main() {
     gameArray[4] = node5;
     gameArray[5] = node6;
 
-    printf("gameArray[0]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[0]->price, gameArray[0]->title, gameArray[0]->popularity);
-    printf("gameArray[1]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[1]->price, gameArray[1]->title, gameArray[1]->popularity); 
-    printf("gameArray[2]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[2]->price, gameArray[2]->title, gameArray[2]->popularity);
-    printf("gameArray[3]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[3]->price, gameArray[3]->title, gameArray[3]->popularity);
-    printf("gameArray[4]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[4]->price, gameArray[4]->title, gameArray[4]->popularity);
-    printf("gameArray[5]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[5]->price, gameArray[5]->title, gameArray[5]->popularity);
+
 
     return 0;
 }
