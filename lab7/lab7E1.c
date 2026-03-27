@@ -27,13 +27,34 @@ game * gameNode(double price, char * title, unsigned int popularity) {
     return node;       //Return pointer to the created node
 };
 
+void printArray(game ** array) {
+    int i;
+
+    printf("%-10s%-25s%s\n", "Price", "Title", "Popularity");
+
+    for (i = 0; i < 6; i++) {
+        printf("$%-10.2lf%-24s%u\n", array[i]->price, array[i]->title, array[0]->popularity);
+    };
+}
+
 //Compares game popularity based 
-int compGamesByTitle(const game * a, const game * b) {
+int compGamesByTitle(const void * a, const void * b) {
     return 0;
 };
 
-int compGamesByPrice(const game *a, const game * b) {
-    return 0;
+int compGamesByPrice(const void *a, const void * b) {
+    game *g1 = (game*)a;
+    game *g2 = (game*)b;
+    
+    size_t length;
+
+    if ((strlen(g1->title)) > (strlen(g2->title))) {
+        length = (size_t)(strlen(g1->title));
+    } else {
+        length = (size_t)(strlen(g2->title));
+    }
+
+    return strncmp(g1->title, g2->title, length);
 };
 
 int main() {
@@ -55,8 +76,10 @@ int main() {
     gameArray[4] = node5;
     gameArray[5] = node6;
 
-    game ** titleArray = gameArray;
-    qsort(titleArray, 6, sizeof(game), compGamesByTitle);
+    printArray(gameArray);
+
+    game ** priceArray = gameArray;
+    qsort(priceArray, 6, sizeof(game), compGamesByPrice);
 
     return 0;
 }
