@@ -38,6 +38,11 @@ int compGamesByPrice(const void *a, const void * b) {
 
 int main() {
     game *node1 = gameNode(22.79, "Opus Magnum", 1);
-    printf("Our node contains\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n", node1->price, node1->title, node1->popularity);
+    static game * gameArray[6];
+
+    gameArray[0] = node1;
+
+    printf("gameArray[0]\nPrice: %.2lf\nTitle: %s\nPopularity: %d\n\n", gameArray[0]->price, gameArray[0]->title, gameArray[0]->popularity);
+    
     return 0;
 }
