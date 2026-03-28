@@ -25,7 +25,7 @@ game * gameNode(double price, char * title, unsigned int popularity) {
     node->popularity = popularity;          //Set node->popularity to popularity
 
     return node;       //Return pointer to the created node
-};
+}
 
 //Prints the given game array with table formatting
 void printArray(game ** array) {            int i;      //Looping variable
@@ -41,7 +41,7 @@ void printArray(game ** array) {            int i;      //Looping variable
 //qsort argument to sort array by title member
 int compGamesByTitle(const void * a, const void * b) {
     return 0;
-};
+}
 
 //qsort argument to sort array by price member
 int compGamesByPrice(const void * a, const void * b) { 
@@ -49,7 +49,7 @@ int compGamesByPrice(const void * a, const void * b) {
     game *g2 = *(game**)b;      //Cast b as 'game' to a pointer, g2
 
     return (int)((g1->price*100) - (g2->price*100));    //Return -1 if a cheaper than b, 0 if equal, etc
-};
+}
 
 int main() {
     //Initialize all the nodes to match the given table
