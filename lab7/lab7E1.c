@@ -27,8 +27,8 @@ game * gameNode(double price, char * title, unsigned int popularity) {
     return node;       //Return pointer to the created node
 };
 
-void printArray(game ** array) {        //Prints the given game array with table formatting
-    int i;      //Looping variable
+//Prints the given game array with table formatting
+void printArray(game ** array) {            int i;      //Looping variable
 
     printf("%-10s%-24s%s\n", "Price", "Title", "Popularity");   //Column headers for user
 
@@ -38,16 +38,17 @@ void printArray(game ** array) {        //Prints the given game array with table
     };
 }
 
-//Compares game popularity based 
+//qsort argument to sort array by title member
 int compGamesByTitle(const void * a, const void * b) {
     return 0;
 };
 
-int compGamesByPrice(const void *a, const void * b) {
-    game *g1 = (game*)a;
-    game *g2 = (game*)b;
+//qsort argument to sort array by price member
+int compGamesByPrice(const void * a, const void * b) { 
+    game *g1 = *(game**)a;      //Cast a as 'game' to a pointer, g1
+    game *g2 = *(game**)b;      //Cast b as 'game' to a pointer, g2
 
-    return (int)(g1->price - g2->price);
+    return (int)((g1->price*100) - (g2->price*100));    //Return -1 if a cheaper than b, 0 if equal, etc
 };
 
 int main() {
@@ -69,11 +70,15 @@ int main() {
     gameArray[4] = node5;
     gameArray[5] = node6;
 
+    //Print the starting array
     printArray(gameArray);
 
-    qsort(gameArray, (sizeof(gameArray)/sizeof(gameArray[0])), sizeof(game), compGamesByPrice);
+    //Calculate the number of elements and qsort the array by price
+    size_t numGames = sizeof(gameArray) / sizeof(gameArray[0]);
+    qsort(gameArray, numGames, sizeof(gameArray[0]), compGamesByPrice);
 
+    //Print array sorted by price (ascending)
     printArray(gameArray);
 
-    return 0;
+    return 0;   //Exit main
 }
