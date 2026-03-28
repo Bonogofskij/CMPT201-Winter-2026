@@ -36,11 +36,22 @@ void printArray(game ** array) {            int i;      //Looping variable
         //Print all its information
         printf("$%-9.2lf%-24s%u\n", array[i]->price, array[i]->title, array[i]->popularity);
     };
+    printf("\n");   //Newline for formatting
 }
 
 //qsort argument to sort array by title member
 int compGamesByTitle(const void * a, const void * b) {
-    return 0;
+    game *g1 = *(game**)a;      //Cast a as 'game' to a pointer, g1
+    game *g2 = *(game**)b;      //Cast b as 'game' to a pointer, g2
+
+    size_t length;
+    if (strlen(g1->title) > strlen(g2->title)) {
+        length = strlen(g1->title);
+    } else {
+        length = strlen(g2->title);
+    }
+
+    return strncmp(g1->title, g2->title, length);
 }
 
 //qsort argument to sort array by price member
@@ -71,6 +82,7 @@ int main() {
     gameArray[5] = node6;
 
     //Print the starting array
+    printf("\nThe original, unaltered array\n");    //Showing user the context of printArray
     printArray(gameArray);
 
     //Calculate the number of elements and qsort the array by price
@@ -78,6 +90,13 @@ int main() {
     qsort(gameArray, numGames, sizeof(gameArray[0]), compGamesByPrice);
 
     //Print array sorted by price (ascending)
+    printf("The array when sorted by price\n");     //Showing user the context of printArray
+    printArray(gameArray);
+
+    qsort(gameArray, numGames, sizeof(gameArray[0]), compGamesByTitle);
+
+    //Print array when sorted by title, alphabetically
+    printf("The array sorted by title\n");          //Showing user the context of printArray
     printArray(gameArray);
 
     return 0;   //Exit main
