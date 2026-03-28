@@ -30,11 +30,11 @@ game * gameNode(double price, char * title, unsigned int popularity) {
 void printArray(game ** array) {        //Prints the given game array with table formatting
     int i;      //Looping variable
 
-    printf("%-10s%-25s%s\n", "Price", "Title", "Popularity");   //Column headers for user
+    printf("%-10s%-24s%s\n", "Price", "Title", "Popularity");   //Column headers for user
 
     for (i = 0; i < 6; i++) {       //For each slot in the array
         //Print all its information
-        printf("$%-10.2lf%-24s%u\n", array[i]->price, array[i]->title, array[i]->popularity);
+        printf("$%-9.2lf%-24s%u\n", array[i]->price, array[i]->title, array[i]->popularity);
     };
 }
 
@@ -46,16 +46,8 @@ int compGamesByTitle(const void * a, const void * b) {
 int compGamesByPrice(const void *a, const void * b) {
     game *g1 = (game*)a;
     game *g2 = (game*)b;
-    
-    size_t length;
 
-    if ((strlen(g1->title)) > (strlen(g2->title))) {
-        length = (size_t)(strlen(g1->title));
-    } else {
-        length = (size_t)(strlen(g2->title));
-    }
-
-    return (g1->price - g2->price);
+    return (int)(g1->price - g2->price);
 };
 
 int main() {
@@ -79,7 +71,7 @@ int main() {
 
     printArray(gameArray);
 
-    qsort(gameArray, 6, sizeof(game), compGamesByPrice);
+    qsort(gameArray, (sizeof(gameArray)/sizeof(gameArray[0])), sizeof(game), compGamesByPrice);
 
     printArray(gameArray);
 
