@@ -26,7 +26,7 @@ void printArray(game * array) {
         //Print all its information
         printf("$%-9.2lf%-24s%u\n", array[i].price, array[i].title, array[i].popularity);    
     };
-    printf("\n");   //Newline for formatting
+    printf("\n\n");   //Newline for formatting
 }
 
 //qsort argument to sort array by title member
@@ -67,11 +67,18 @@ void writeBinary(game * array) {
         return;     //Return to escape function
     }
 
+    //Write contents of array to out.bin in binary
     size_t n = fwrite(array, sizeof(game), 6, fp);
-    printf("Successfully wrote %u structs to out.bin\n\n", n);
-    fclose(fp);
+    
+    //Make sure we wrote 6 items to out.bin
+    if (n != 6) {
+        //Standard error message with context
+        fprintf(stderr, "An error occured when writing to out.bin!\n");
+        return;
+    }
 
-    return;
+    //Close the file
+    fclose(fp);
 };
 
 //Read the binary file created by writeBinary back into a new array
@@ -85,14 +92,23 @@ void readBinary(game * array) {
         return NULL;    //Exit func early
     }
 
+    //Read out.bin to the array given
     size_t length = fread(array, sizeof(game), 6, fp);
-    printf("Successfully read %u items\n\n", length);
+
+    //Make sure we read 6 items, no more no less
+    if (length != 6) {
+        //Standard error with some context if reading failed
+        fprintf(stderr, "Error occured when reading out.bin!\n");
+        return;
+    }
+
+    //Close the file
+    fclose(fp);
 }
 
 
 int main() {
-    //Initialize all the nodes to match the given table
-    
+    //Initialize all the nodes to match the given table   
     static game gameArray[6] = {
         {22.79, "Opus Magnum", 1},
         {0.01, "Minecraft", 4},
@@ -128,6 +144,7 @@ int main() {
     readBinary(newArray);
 
     //Print newArray, which should contain the information we read from readBinary
+    printf("The new array we got from out.bin\n");
     printArray(newArray);
 
     return 0;   //Exit main
