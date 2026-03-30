@@ -63,9 +63,9 @@ int compGamesByPrice(const void * a, const void * b) {
 }
 
 //Write the array of games to a binary file called out.bin
-void writeBinary(array) {
+void writeBinary(game ** array) {
     FILE *fp;           //Initialize a file pointer
-    fopen("out.bin", "wb");
+    fp = fopen("out.bin", "wb");
 
     //Error handling if the file cannot be opened/created
     if (fp == NULL) {
@@ -75,8 +75,25 @@ void writeBinary(array) {
 
     
     size_t size = fwrite(array, sizeof(game), 6, fp);
-    printf("Succesfully wrote all %d elements of gameArray to out.bin!\n\n");
+    printf("Succesfully wrote all %ld elements of gameArray to out.bin!\n\n", size);
 };
+
+//Read the binary file created by writeBinary back into a new array
+game ** readBinary(game ** array) {
+    FILE *fp;
+    fp = fopen("out.bin", "rb");
+
+    if (fp == NULL) {
+        fprintf(stderr, "Could not open out.in\n");
+        return NULL;
+    }
+
+    fread(array, sizeof(game), 6, fp);
+    printArray(array);
+    
+    return array;
+}
+
 
 int main() {
     //Initialize all the nodes to match the given table
