@@ -20,7 +20,7 @@ lab7E1: lab7E1.o
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
-	rm -f *.o lab7E1
+	rm -f *.o lab7E1 *.bin
 	clear
 
 tar:

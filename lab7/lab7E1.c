@@ -62,6 +62,22 @@ int compGamesByPrice(const void * a, const void * b) {
     return (int)((g1->price*100) - (g2->price*100));    //Return -1 if a cheaper than b, 0 if equal, etc
 }
 
+//Write the array of games to a binary file called out.bin
+void writeBinary(array) {
+    FILE *fp;           //Initialize a file pointer
+    fopen("out.bin", "wb");
+
+    //Error handling if the file cannot be opened/created
+    if (fp == NULL) {
+        fprintf(stderr, "Could not open / create 'out.bin'\n");
+        return;
+    }
+
+    
+    size_t size = fwrite(array, sizeof(game), 6, fp);
+    printf("Succesfully wrote all %d elements of gameArray to out.bin!\n\n");
+};
+
 int main() {
     //Initialize all the nodes to match the given table
     game *node1 = gameNode(22.79, "Opus Magnum", 1);
@@ -98,6 +114,9 @@ int main() {
     //Print array when sorted by title, alphabetically
     printf("The array sorted by title\n");          //Showing user the context of printArray
     printArray(gameArray);
+
+    //Write the array to binary file out.bin
+    writeBinary(gameArray);
 
     return 0;   //Exit main
 }
