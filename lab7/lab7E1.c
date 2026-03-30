@@ -67,13 +67,15 @@ void writeBinary(game * array) {
         return;     //Return to escape function
     }
 
-    size_t n = fwrite(&array, sizeof(game), 6, fp);
+    size_t n = fwrite(array, sizeof(game), 6, fp);
     printf("Successfully wrote %u structs to out.bin\n\n", n);
     fclose(fp);
+
+    return;
 };
 
 //Read the binary file created by writeBinary back into a new array
-void readBinary(game ** array) {
+void readBinary(game * array) {
     FILE *fp;       //Initialize file pointer
     fp = fopen("out.bin", "rb");
 
@@ -83,8 +85,8 @@ void readBinary(game ** array) {
         return NULL;    //Exit func early
     }
 
-    size_t n = fread(&array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
-    printArray(array);
+    size_t length = fread(array, sizeof(game), 6, fp);
+    printf("Successfully read %u items\n\n", length);
 }
 
 
@@ -122,8 +124,11 @@ int main() {
     writeBinary(gameArray);
 
     //Make a new array to store the output of out.bin
-    //game newArray[6];
-    //readBinary(newArray);
+    game newArray[6];
+    readBinary(newArray);
+
+    //Print newArray, which should contain the information we read from readBinary
+    printArray(newArray);
 
     return 0;   //Exit main
 }
