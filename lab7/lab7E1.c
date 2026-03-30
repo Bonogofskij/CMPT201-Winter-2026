@@ -28,8 +28,8 @@ game * gameNode(double price, char * title, unsigned int popularity) {
 }
 
 //Prints the given game array with table formatting
-void printArray(game ** array) {            int i;      //Looping variable
-
+void printArray(game ** array) {            
+    int i;      //Looping variable
     printf("%-10s%-24s%s\n", "Price", "Title", "Popularity");   //Column headers for user
 
     for (i = 0; i < 6; i++) {       //For each slot in the array
@@ -44,10 +44,13 @@ int compGamesByTitle(const void * a, const void * b) {
     game *g1 = *(game**)a;      //Cast a as 'game' to a pointer, g1
     game *g2 = *(game**)b;      //Cast b as 'game' to a pointer, g2
 
+    //Initialize length to store value of longest string length
     size_t length;
+    //str1 longer than s2, strlen(str1) = length
     if (strlen(g1->title) > strlen(g2->title)) {
         length = strlen(g1->title);
     } else {
+    //str2 longer tha or equal to str1, strlen(str2) = length
         length = strlen(g2->title);
     }
 
@@ -65,17 +68,21 @@ int compGamesByPrice(const void * a, const void * b) {
 //Write the array of games to a binary file called out.bin
 void writeBinary(game ** array) {
     FILE *fp;           //Initialize a file pointer
-    fp = fopen("out.bin", "wb");
+    fp = fopen("out.bin", "wb");    //Open / overwrite 'out.bin' in write-binary mode
 
     //Error handling if the file cannot be opened/created
-    if (fp == NULL) {
+    if (fp == NULL) {       //No file pointer means file not open
         fprintf(stderr, "Could not open / create 'out.bin'\n");
         return;     //Return to escape function
-    }   
+    }
+
+    size_t n = fwrite(&array, sizeof(game), 6, fp);
+    printf("Successfully wrote %u structs to out.bin\n\n", n);
+    fclose(fp);
 };
 
 //Read the binary file created by writeBinary back into a new array
-game ** readBinary(game ** array) {
+void readBinary(game ** array) {
     FILE *fp;       //Initialize file pointer
     fp = fopen("out.bin", "rb");
 
@@ -85,10 +92,8 @@ game ** readBinary(game ** array) {
         return NULL;    //Exit func early
     }
 
-    fread(array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
+    size_t n = fread(array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
     printArray(array);
-    
-    return array;
 }
 
 
@@ -133,8 +138,8 @@ int main() {
     writeBinary(gameArray);
 
     //Make a new array to store the output of out.bin
-    game ** newArray;
-    newArray = readBinary(newArray);
+    game * newArray[6];
+    readBinary(newArray);
 
     return 0;   //Exit main
 }
