@@ -92,13 +92,14 @@ void readBinary(game ** array) {
         return NULL;    //Exit func early
     }
 
-    size_t n = fread(array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
+    size_t n = fread(&array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
     printArray(array);
 }
 
 
 int main() {
     //Initialize all the nodes to match the given table
+    
     game *node1 = gameNode(22.79, "Opus Magnum", 1);
     game *node2 = gameNode(0.01, "Minecraft", 4);
     game *node3 = gameNode(14.99, "Trainz", 2);
@@ -138,8 +139,8 @@ int main() {
     writeBinary(gameArray);
 
     //Make a new array to store the output of out.bin
-    game * newArray[6];
-    readBinary(newArray);
+    //game * newArray[6];
+    //readBinary(newArray);
 
     return 0;   //Exit main
 }
