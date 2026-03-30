@@ -70,25 +70,22 @@ void writeBinary(game ** array) {
     //Error handling if the file cannot be opened/created
     if (fp == NULL) {
         fprintf(stderr, "Could not open / create 'out.bin'\n");
-        return;
-    }
-
-    
-    size_t size = fwrite(array, sizeof(game), 6, fp);
-    printf("Succesfully wrote all %ld elements of gameArray to out.bin!\n\n", size);
+        return;     //Return to escape function
+    }   
 };
 
 //Read the binary file created by writeBinary back into a new array
 game ** readBinary(game ** array) {
-    FILE *fp;
+    FILE *fp;       //Initialize file pointer
     fp = fopen("out.bin", "rb");
 
+    //Error check the opening process, print error and exit if file not opened
     if (fp == NULL) {
         fprintf(stderr, "Could not open out.in\n");
-        return NULL;
+        return NULL;    //Exit func early
     }
 
-    fread(array, sizeof(game), 6, fp);
+    fread(array, sizeof(game), 6, fp);      //Read from our file pointer to the input array
     printArray(array);
     
     return array;
@@ -134,6 +131,10 @@ int main() {
 
     //Write the array to binary file out.bin
     writeBinary(gameArray);
+
+    //Make a new array to store the output of out.bin
+    game ** newArray;
+    newArray = readBinary(newArray);
 
     return 0;   //Exit main
 }
