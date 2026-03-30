@@ -12,9 +12,9 @@ Lecture Instructor’s Name:  Ardy RD
 
 //Struct to hold information about each individual game
 typedef struct {
-    double price;               //Cost
-    char title[25];             //Game title
-    unsigned int popularity: 3;    //int ranking how popular, scale 1-4
+    double price;                   //Cost
+    char title[25];                 //Game title
+    unsigned int popularity: 3;     //int ranking how popular, scale 1-4
 } game;     //Yay typedefs
 
 //Make a 'game' struct with given values, and return a pointer to the struct
